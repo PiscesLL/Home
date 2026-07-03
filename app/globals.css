@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------------------------------------------------------------- */
+/*  Theme tokens — values are RGB triplets so Tailwind can multiply alpha.    */
+/* -------------------------------------------------------------------------- */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --c-page: 240 239 234; /* #F0EFEA — outer background behind the card */
+  --c-surface: 252 249 248; /* #fcf9f8 */
+  --c-surface-bright: 252 249 248;
+  --c-surface-container-lowest: 255 255 255;
+  --c-surface-container-low: 246 243 242;
+  --c-surface-container: 240 237 237;
+  --c-surface-container-high: 234 231 231;
+
+  --c-on-surface: 28 27 27; /* #1c1b1b */
+  --c-on-surface-variant: 68 72 69;
+  --c-secondary: 94 95 92;
+  --c-tertiary: 58 122 96; /* #3A7A60 — deeper sage to pair with the light mint tag bg */
+  --c-on-tertiary-fixed-variant: 58 122 96;
+  --c-primary: 94 94 93;
+
+  --c-border-soft: 229 227 223; /* #E5E3DF */
+  --c-text-muted: 102 102 102;
+  /* Light mode: muted sage-mint. Calm presence on warm off-white. */
+  --c-mint: 125 191 160; /* #7DBFA0 */
+
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.04);
+  --shadow-glow-mint:
+    0 0 0 1px rgba(125, 191, 160, 0.32), 0 8px 32px rgba(125, 191, 160, 0.08);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Page is true black; card surfaces are slightly elevated so they
+     read clearly against it. */
+  --c-page: 0 0 0;
+  --c-surface: 14 16 20;
+  --c-surface-bright: 18 20 26;
+  --c-surface-container-lowest: 12 14 18;
+  --c-surface-container-low: 18 20 26;
+  --c-surface-container: 24 27 34;
+  --c-surface-container-high: 30 33 42;
+
+  --c-on-surface: 233 232 230; /* warm white */
+  --c-on-surface-variant: 188 190 196;
+  --c-secondary: 168 170 178;
+  --c-tertiary: 152 255 216;
+  --c-on-tertiary-fixed-variant: 152 255 216;
+  --c-primary: 200 202 210;
+
+  --c-border-soft: 56 60 72;
+  --c-text-muted: 142 144 152;
+  --c-mint: 152 255 216;
+
+  --shadow-card:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 64px rgba(0, 0, 0, 0.7);
+  --shadow-glow-mint:
+    0 0 0 1px rgba(152, 255, 216, 0.25), 0 12px 36px rgba(152, 255, 216, 0.08);
+}
+
+html,
+body {
+  height: 100%;
+  background: rgb(var(--c-page));
+  color: rgb(var(--c-on-surface));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family:
+    var(--font-inter),
+    Inter,
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    sans-serif;
+}
+
+/* Apply a one-shot transition only while the theme is being toggled. */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition:
+    background-color 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    fill 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    stroke 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 240ms cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--c-on-surface) / 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--c-on-surface) / 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
